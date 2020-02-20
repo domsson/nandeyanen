@@ -19,25 +19,6 @@ function Nandeyanen(japanese_selector, translate_selector)
 		//"ん",
 	];
 
-	/*
-	this.yoon = [
-		"きゃ",     "きゅ",     "きょ", // k
-		"ぎゃ",     "ぎゅ",     "ぎょ", // g
-		"しゃ",     "しゅ",     "しょ", // s
-		"じゃ",     "じゅ",     "じょ", // z
-		"ちゃ",     "ちゅ",     "ちょ", // t
-		"ぢゃ",     "ぢゅ",     "ぢょ", // d
-		"にゃ",     "にゅ",     "にょ", // n
-		"ひゃ",     "ひゅ",     "ひょ", // h
-		"びゃ",     "びゅ",     "びょ", // b
-		"ぴゃ",     "ぴゅ",     "ぴょ", // p
-		"みゃ",     "みゅ",     "みょ", // m
-		"りゃ",     "りゅ",     "りょ", // r
-	];
-	*/
-
-	this.hiragana = this.seion.concat(this.yoon);
-
 	this.n = "ん";
 	this.sokuon = "っ";
 	this.yoon = ["ゃ", "ゅ", "ょ"];
@@ -62,9 +43,26 @@ Nandeyanen.prototype.lorn = function(min, max)
 	let s = "";
 	let n = this.rand(min, max);
 
+	let was_sokuon = false;
+	let was_n      = false;
+
+	let n_chance = 0.0;
+	let yoon_chance = 0.0;
+	let sokuon_chance = 0.0;
+
 	for (let i = 0; i < n; ++i)
 	{
-		s += this.gibe((i == 0 ? 0.0 : 0.2), 0.33, ((i == (n-1) || i == 0) ? 0.0 : 0.2));
+		n_chance      = was_n || was_sokuon || i == 0 ? 0.0 : 0.2;
+		yoon_chance   = 0.33;
+		sokuon_chance = was_sokuon || i == 0 || i == (n-1) ? 0.0 : 0.2;
+
+		let h = this.gibe(n_chance, yoon_chance, sokuon_chance);
+	
+		was_sokuon = (h == this.sokuon);
+		was_n      = (h == this.n);
+
+		s += h;
+		
 	}
 
 	if (this.japanese)
@@ -105,11 +103,11 @@ Nandeyanen.prototype.gibe = function(n_chance, yoon_chance, sokuon_chance)
 
 	while (h === null)
 	{
-		r = this.rand(0, this.hiragana.length - 1);
-		h = this.hiragana[r];
+		r = this.rand(0, this.seion.length - 1);
+		h = this.seion[r];
 	}
 
-	if ((r % 5) == 1 && Math.random() <= yoon_chance)
+	if ((r % 5) == 1 && Math.random() < yoon_chance)
 	{
 		let r2 = this.rand(0, this.yoon.length - 1);
 		h += this.yoon[r2];
