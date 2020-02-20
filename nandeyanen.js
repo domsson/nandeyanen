@@ -34,7 +34,6 @@ function Nandeyanen(japanese_selector, translate_selector)
 	this.sokuon = "っ";
 	this.particles = ["が", "と", "に", "の", "は", "へ", "を"];
 
-	this.api_url       = "https://jisho.org/api/v1/search/words?keyword=";
 	this.translate_url = "https://translate.google.com/#view=home&op=translate&sl=ja&tl=en&text=";
 
 	this.japanese_selector = japanese_selector;
@@ -48,74 +47,6 @@ Nandeyanen.prototype.init = function()
 	this.japanese = document.querySelector(this.japanese_selector);
 	this.translate = document.querySelector(this.translate_selector);
 	this.fetch_nouns("n1");
-};
-
-Nandeyanen.prototype.fetch_nouns = function(jlpt)
-{
-	let req = new XMLHttpRequest();
-	let handler = this.on_receive_nouns.bind(this, req);
-	req.onreadystatechange = handler;
-	req.open('GET', this.api_url + "%23n%20%23jlpt-" + jlpt, true);
-	req.send();
-	return true;
-};
-
-Nandeyanen.prototype.fetch_verbs = function(jlpt)
-{
-	let req = new XMLHttpRequest();
-	let handler = this.on_receive_verbs.bind(this, req);
-	req.onreadystatechange = handler;
-	req.open('GET', this.api_url + "%23verb%20%23jlpt-" + jlpt, true);
-	req.send();
-	return true;
-};
-
-Nandeyanen.prototype.on_receive_nouns = function(req)
-{
-	if (req.readyState !== XMLHttpRequest.DONE)
-	{
-		return;
-	}
-	
-	if (req.status !== 200)
-	{
-		console.log("Oh no!");
-		return;
-	}
-
-	let res = JSON.parse(req.responseText);
-
-	if (!res.data)
-	{
-		console.log("Wat?!");
-		return;
-	}
-
-	console.log(res);
-};
-
-Nandeyanen.prototype.on_receive_verbs = function(req)
-{
-	if (req.readyState !== XMLHttpRequest.DONE)
-	{
-		return;
-	}
-	
-	if (req.status !== 200)
-	{
-		console.log("Oh no!");
-		return;
-	}
-
-	let res = JSON.parse(req.responseText);
-
-	if (!res.data)
-	{
-		console.log("Wat?!");
-		return;
-	}
-
-	console.log(res);
 };
 
 Nandeyanen.prototype.lorn = function(min, max)
