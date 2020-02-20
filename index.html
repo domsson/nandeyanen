@@ -15,6 +15,9 @@
 			let nandeyanen = new Nandeyanen(".japanese", ".translate");
 			nandeyanen.init();
 			nandeyanen.lorn(2, 4);
+
+			let jp = document.querySelector(".japanese");
+			jp.addEventListener("click", function(){ nandeyanen.lorn(2,4);});
 		</script>
 	</body>
 </html>

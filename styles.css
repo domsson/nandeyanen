@@ -23,10 +23,20 @@ main {
 }
 
 .japanese {
+	display: block;
 	font-size: 4rem;
+	margin: 2rem;
+
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .translate {
+	display: block;
+	font-size: 1.25rem;
 	color: inherit;
 	text-decoration: none;
 }
