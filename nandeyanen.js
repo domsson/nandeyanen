@@ -64,7 +64,7 @@ Nandeyanen.prototype.lorn = function(min, max)
 
 	for (let i = 0; i < n; ++i)
 	{
-		s += this.gibe((i == 0 ? 0.0 : 0.2), 0.33, (i == (n-1) ? 0.0 : 0.2));
+		s += this.gibe((i == 0 ? 0.0 : 0.2), 0.33, ((i == (n-1) || i == 0) ? 0.0 : 0.2));
 	}
 
 	if (this.japanese)
