@@ -60,7 +60,41 @@ Nandeyanen.prototype.fetch_nouns = function(jlpt)
 	return true;
 };
 
+Nandeyanen.prototype.fetch_verbs = function(jlpt)
+{
+	let req = new XMLHttpRequest();
+	let handler = this.on_receive_verbs.bind(this, req);
+	req.onreadystatechange = handler;
+	req.open('GET', this.api_url + "%23verb%20%23jlpt-" + jlpt, true);
+	req.send();
+	return true;
+};
+
 Nandeyanen.prototype.on_receive_nouns = function(req)
+{
+	if (req.readyState !== XMLHttpRequest.DONE)
+	{
+		return;
+	}
+	
+	if (req.status !== 200)
+	{
+		console.log("Oh no!");
+		return;
+	}
+
+	let res = JSON.parse(req.responseText);
+
+	if (!res.data)
+	{
+		console.log("Wat?!");
+		return;
+	}
+
+	console.log(res);
+};
+
+Nandeyanen.prototype.on_receive_verbs = function(req)
 {
 	if (req.readyState !== XMLHttpRequest.DONE)
 	{
