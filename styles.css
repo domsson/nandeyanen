@@ -1,0 +1,33 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ddd;
+	background: #333;
+}
+
+main {
+	text-align: center;
+}
+
+.japanese {
+	font-size: 3rem;
+}
+
+.translate {
+	color: inherit;
+	text-decoration: none;
+}
+
