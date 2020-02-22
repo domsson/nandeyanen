@@ -1,5 +1,55 @@
 function Nandeyanen(japanese_selector, translate_selector)
 {
+	this.hiragana = [
+		// reg | " | o |  yoon? | sokuon_chance ]
+		["あ", null, null, false], //  a
+		["い", null, null, false], //  i
+		["う", null, null, false], //  u
+		["え", null, null, false], //  e
+		["お", null, null, false], //  o
+		["か", "が", null, false], // ka
+		["き", "ぎ", null, true ], // ki
+		["く", "ぐ", null, false], // ku
+		["け", "げ", null, false], // ke
+		["こ", "ご", null, false], // ko
+		["さ", "ざ", null, false], // sa
+		["し", "じ", null, true ], // shi
+		["す", "ず", null, false], // su
+		["せ", "ぜ", null, false], // se
+		["そ", "ぞ", null, false], // so
+		["た", "だ", null, false], // ta
+		["ち", "ぢ", null, true ], // chi
+		["つ", "づ", null, false], // tsu
+		["て", "で", null, false], // te
+		["と", "ど", null, false], // to
+		["な", null, null, false], // na
+		["に", null, null, true ], // ni
+		["ぬ", null, null, false], // nu
+		["ね", null, null, false], // ne
+		["の", null, null, false], // no
+		["は", "ば", "ぱ", false], // ha
+		["ひ", "び", "ぴ", true ], // hi
+		["ふ", "ぶ", "ぷ", false], // hu
+		["へ", "べ", "ぺ", false], // he
+		["ほ", "ぼ", "ぽ", false], // ho
+		["ま", null, null, false], // ma
+		["み", null, null, true ], // mi
+		["む", null, null, false], // mu
+		["め", null, null, false], // me
+		["も", null, null, false], // mo
+		["や", null, null, false], // ya
+		["ゆ", null, null, false], // yu
+		["よ", null, null, false], // yo
+		["ら", null, null, false], // ra
+		["り", null, null, true ], // ri
+		["る", null, null, false], // ru
+		["れ", null, null, false], // re
+		["ろ", null, null, false], // ro
+		["わ", null, null, false], // wa
+		["を", null, null, false], // wo
+		["ん", null, null, false], // n
+	];
+
 	this.seion = [
 		"あ", "い", "う", "え", "お", // -
 		"か", "き", "く", "け", "こ", // k
@@ -30,6 +80,9 @@ function Nandeyanen(japanese_selector, translate_selector)
 	this.translate_selector = translate_selector;
 	this.japanese = null;
 	this.translate = null;
+
+	// https://gawron.sdsu.edu/crypto/lectures/hiragana.html
+	// https://gawron.sdsu.edu/crypto/japanese_models/hir_freq.html
 };
 
 Nandeyanen.prototype.init = function()
